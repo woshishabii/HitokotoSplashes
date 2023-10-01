@@ -45,9 +45,9 @@ public class TitleScreenMixin extends Screen {
             if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 res = gson.fromJson(EntityUtils.toString(response.getEntity()), Hitokoto.class);
                 HitokotoSplashes.LOGGER.info(res.getHitokoto());
-            }
+            } else throw new IOException();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            res.setHitokoto("获取失败");
         }
     }
 
